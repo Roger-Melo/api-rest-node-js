@@ -4,7 +4,7 @@ import { transactionsRoutes } from "./routes/transactions.js";
 
 const app = fastify({ logger: true });
 
-app.register(transactionsRoutes);
+app.register(transactionsRoutes, { prefix: "transactions" });
 
 const start = async () => {
 	try {
