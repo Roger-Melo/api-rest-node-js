@@ -4,6 +4,26 @@ import { randomUUID } from "node:crypto";
 import { knex } from "../database.js";
 
 export async function transactionsRoutes(app: FastifyInstance) {
+	app.get("/", async () => {
+		const transactions = await knex("transactions").select();
+		return {
+			transactions,
+		};
+	});
+
+	app.get("/:transactionId", async (req) => {
+		const paramsSchema = z.object({
+			transactionId: z.uuid(),
+		});
+
+		const { transactionId } = paramsSchema.parse(req.params);
+
+		const transaction = await knex("transactions").where("id", transactionId).first();
+		return {
+			transaction,
+		};
+	});
+
 	app.post("/", async (req, res) => {
 		const transactionSchema = z.object({
 			title: z.string().nonempty(),
