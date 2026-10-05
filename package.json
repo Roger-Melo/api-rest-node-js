@@ -8,12 +8,13 @@
 		"dev": "tsx watch src/server.ts",
 		"lint": "eslint src",
 		"lint:fix": "eslint src --fix",
-		"knex": "node --no-warnings --import tsx ./node_modules/knex/bin/cli.js"
+		"knex": "node --no-warnings --import tsx ./node_modules/knex/bin/cli.js",
+		"test": "pnpm exec vitest"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
-	"packageManager": "pnpm@12.8.1",
+	"packageManager": "pnpm@12.9.1",
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
 		"@types/node": "^26.6.2",
@@ -23,7 +24,8 @@
 		"prettier": "^3.9.8",
 		"tsx": "^4.23.15",
 		"typescript": "~6.0.3",
-		"typescript-eslint": "^8.70.1"
+		"typescript-eslint": "^8.70.1",
+		"vitest": "^5.0.3"
 	},
 	"dependencies": {
 		"@fastify/cookie": "^11.1.2",
