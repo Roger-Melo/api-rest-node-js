@@ -35,15 +35,15 @@ describe("Transaction routes", () => {
 			type: "credit",
 		};
 
-		const response = await supertest(app.server).post("/transactions").send(transaction);
-		const cookies = response.get("Set-Cookie");
+		const createdTransactionResponse = await supertest(app.server).post("/transactions").send(transaction);
+		const cookies = createdTransactionResponse.get("Set-Cookie");
 
 		if (!cookies) throw new Error("Expected Set-Cookie header after creating a transaction");
 
-		const response2 = await supertest(app.server).get("/transactions").set("Cookie", cookies);
+		const transactionsListResponse = await supertest(app.server).get("/transactions").set("Cookie", cookies);
 
-		expect(response2.statusCode).toEqual(200);
-		expect(response2.body.transactions).toEqual([
+		expect(transactionsListResponse.statusCode).toEqual(200);
+		expect(transactionsListResponse.body.transactions).toEqual([
 			expect.objectContaining({ title: transaction.title, amount: transaction.amount }),
 		]);
 	});
